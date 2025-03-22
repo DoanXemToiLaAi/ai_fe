@@ -1,22 +1,24 @@
-import type React from "react"
-import type { Metadata } from "next"
-import { Inter } from "next/font/google"
-import "./globals.css"
-import Header from "@/components/header"
-import Footer from "@/components/footer"
+import type React from "react";
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import "./globals.css";
+import Header from "@/components/header";
+import Footer from "@/components/footer";
+import DebugBar from "@/components/debug-bar";
+import ApiDebug from "@/components/api-debug";
 
-const inter = Inter({ subsets: ["latin"] })
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "AI-Powered E-commerce",
-  description: "Shop with the power of AI recommendations and image classification",
-    generator: 'v0.dev'
-}
+  description:
+    "Shop with the power of AI recommendations and image classification",
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
@@ -26,11 +28,9 @@ export default function RootLayout({
           <div className="flex-grow">{children}</div>
           <Footer />
         </div>
+        <DebugBar />
+        <ApiDebug />
       </body>
     </html>
-  )
+  );
 }
-
-
-
-import './globals.css'

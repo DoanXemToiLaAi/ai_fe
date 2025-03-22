@@ -7,9 +7,12 @@ import { motion } from "framer-motion";
 import { Sparkles, ShoppingBag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import LoadingState from "@/components/loading-state";
+import ErrorState from "@/components/error-state";
+import type { ClassificationResult } from "@/types";
 
 export default function UploadPage() {
-  const [result, setResult] = useState<{ category: string } | null>(null);
+  const [result, setResult] = useState<ClassificationResult | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
@@ -31,6 +34,12 @@ export default function UploadPage() {
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const handleRetry = () => {
+    setResult(null);
+    setError(null);
+    setUploadedImage(null);
   };
 
   return (
@@ -88,10 +97,9 @@ export default function UploadPage() {
             <h2 className="text-xl font-semibold mb-4">Kết quả phân loại</h2>
 
             {isLoading ? (
-              <div className="flex flex-col items-center justify-center h-64">
-                <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
-                <p className="mt-4 text-gray-600">Đang phân tích hình ảnh...</p>
-              </div>
+              <LoadingState message="Đang phân tích hình ảnh..." />
+            ) : error ? (
+              <ErrorState message={error} onRetry={handleRetry} />
             ) : result ? (
               <motion.div
                 initial={{ opacity: 0 }}
@@ -113,7 +121,9 @@ export default function UploadPage() {
                   <p className="text-2xl font-bold text-blue-600 mb-2">
                     {result.category}
                   </p>
-                  <p className="text-sm text-blue-600">Độ chính xác: 95%</p>
+                  <p className="text-sm text-blue-600">
+                    Độ chính xác: {result.confidence || 95}%
+                  </p>
                 </div>
 
                 <div className="mt-6">

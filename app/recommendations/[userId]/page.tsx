@@ -1,13 +1,56 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import { getRecommendations } from "@/services/api";
 import ProductList from "@/components/product-list";
 import { Sparkles, ThumbsUp, ThumbsDown } from "lucide-react";
+import LoadingState from "@/components/loading-state";
+import ErrorState from "@/components/error-state";
+import type { RecommendationsData } from "@/types";
 
-export default async function RecommendationsPage({
+export default function RecommendationsPage({
   params,
 }: {
   params: { userId: string };
 }) {
-  const data = await getRecommendations(params.userId);
+  const [data, setData] = useState<RecommendationsData | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  const fetchData = async () => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      const recommendationsData = await getRecommendations(params.userId);
+      setData(recommendationsData);
+    } catch (err) {
+      setError("Không thể tải dữ liệu gợi ý. Vui lòng thử lại sau.");
+      console.error(err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, [params.userId]);
+
+  if (isLoading) {
+    return <LoadingState size="large" message="Đang tải gợi ý sản phẩm..." />;
+  }
+
+  if (error) {
+    return <ErrorState message={error} onRetry={fetchData} />;
+  }
+
+  if (!data) {
+    return (
+      <ErrorState
+        message="Không có dữ liệu gợi ý để hiển thị"
+        onRetry={fetchData}
+      />
+    );
+  }
 
   return (
     <div className="container mx-auto px-4 py-8">

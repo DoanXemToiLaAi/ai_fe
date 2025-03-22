@@ -1,9 +1,51 @@
-import { getHomeData } from "@/services/api"
-import Link from "next/link"
-import Image from "next/image"
+"use client";
 
-export default async function Home() {
-  const data = await getHomeData()
+import { useState, useEffect } from "react";
+import { getHomeData } from "@/services/api";
+import Link from "next/link";
+import Image from "next/image";
+import LoadingState from "@/components/loading-state";
+import ErrorState from "@/components/error-state";
+import type { HomeData } from "@/types";
+
+export default function Home() {
+  const [data, setData] = useState<HomeData | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  const fetchData = async () => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      const homeData = await getHomeData();
+      setData(homeData);
+    } catch (err) {
+      setError("Không thể tải dữ liệu trang chủ. Vui lòng thử lại sau.");
+      console.error(err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  if (isLoading) {
+    return (
+      <LoadingState size="large" message="Đang tải dữ liệu trang chủ..." />
+    );
+  }
+
+  if (error) {
+    return <ErrorState message={error} onRetry={fetchData} />;
+  }
+
+  if (!data) {
+    return (
+      <ErrorState message="Không có dữ liệu để hiển thị" onRetry={fetchData} />
+    );
+  }
 
   return (
     <main className="container mx-auto px-4 py-8">
@@ -24,8 +66,12 @@ export default async function Home() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent">
                   <div className="absolute bottom-0 left-0 right-0 p-4">
-                    <h3 className="text-xl font-semibold text-white">{product.name}</h3>
-                    <p className="mt-1 text-sm text-gray-200">{product.category}</p>
+                    <h3 className="text-xl font-semibold text-white">
+                      {product.name}
+                    </h3>
+                    <p className="mt-1 text-sm text-gray-200">
+                      {product.category}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -53,7 +99,9 @@ export default async function Home() {
                   <h3 className="text-lg font-medium text-gray-900 group-hover:text-primary transition-colors">
                     {product.name}
                   </h3>
-                  <p className="mt-1 text-sm text-gray-500">{product.category}</p>
+                  <p className="mt-1 text-sm text-gray-500">
+                    {product.category}
+                  </p>
                 </div>
               </div>
             </Link>
@@ -61,6 +109,5 @@ export default async function Home() {
         </div>
       </section>
     </main>
-  )
+  );
 }
-

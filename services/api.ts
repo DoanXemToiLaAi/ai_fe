@@ -1,7 +1,7 @@
 // API service functions to interact with the backend
 
 // Thêm URL cơ sở
-const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
+const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
 
 // Hàm helper để tạo headers
 const createHeaders = (userId?: string) => {
@@ -16,19 +16,47 @@ const createHeaders = (userId?: string) => {
   return headers;
 };
 
+// Hàm helper để log API calls (giúp debug)
+const logApiCall = (endpoint: string, method = "GET", data?: any) => {
+  console.log(`🔄 API Call: ${method} ${baseUrl}${endpoint}`);
+  if (data) {
+    console.log("Request data:", data);
+  }
+};
+
+// Hàm helper để log API responses (giúp debug)
+const logApiResponse = (endpoint: string, response: any, error?: any) => {
+  if (error) {
+    console.error(`❌ API Error (${endpoint}):`, error);
+    return;
+  }
+  console.log(`✅ API Response (${endpoint}):`, response);
+};
+
 // Get home page data
 export async function getHomeData(userId?: string) {
+  const endpoint = "/home";
+  logApiCall(endpoint);
+
   try {
     const headers = createHeaders(userId);
 
-    const response = await fetch(`${baseUrl}/home`, { headers });
+    const response = await fetch(`${baseUrl}${endpoint}`, {
+      headers,
+      cache: "no-store", // Disable caching to always get fresh data
+    });
 
     if (!response.ok) {
-      throw new Error("Failed to fetch home data");
+      throw new Error(
+        `Failed to fetch home data: ${response.status} ${response.statusText}`
+      );
     }
 
-    return await response.json();
+    const data = await response.json();
+    logApiResponse(endpoint, data);
+    return data;
   } catch (error) {
+    logApiResponse(endpoint, null, error);
     console.error("Error fetching home data:", error);
     // Return mock data for development
     return {
@@ -84,19 +112,28 @@ export async function getHomeData(userId?: string) {
 
 // Get product details
 export async function getProductData(productId: string) {
+  const endpoint = `/product-page/${productId}`;
+  logApiCall(endpoint);
+
   try {
     const headers = createHeaders();
 
-    const response = await fetch(`${baseUrl}/product-page/${productId}`, {
+    const response = await fetch(`${baseUrl}${endpoint}`, {
       headers,
+      cache: "no-store",
     });
 
     if (!response.ok) {
-      throw new Error("Failed to fetch product data");
+      throw new Error(
+        `Failed to fetch product data: ${response.status} ${response.statusText}`
+      );
     }
 
-    return await response.json();
+    const data = await response.json();
+    logApiResponse(endpoint, data);
+    return data;
   } catch (error) {
+    logApiResponse(endpoint, null, error);
     console.error("Error fetching product data:", error);
     // Return mock data for development
     return {
@@ -157,30 +194,44 @@ export async function getProductData(productId: string) {
 
 // Classify product image
 export async function classifyProduct(image: File) {
+  const endpoint = "/classify-product";
+  logApiCall(endpoint, "POST", { file: image.name });
+
   try {
     const formData = new FormData();
     formData.append("image", image);
 
-    const response = await fetch(`${baseUrl}/classify-product`, {
+    const response = await fetch(`${baseUrl}${endpoint}`, {
       method: "POST",
       body: formData,
     });
 
     if (!response.ok) {
-      throw new Error("Failed to classify image");
+      throw new Error(
+        `Failed to classify image: ${response.status} ${response.statusText}`
+      );
     }
 
-    return await response.json();
+    const data = await response.json();
+    logApiResponse(endpoint, data);
+    return data;
   } catch (error) {
+    logApiResponse(endpoint, null, error);
     console.error("Error classifying image:", error);
-    throw error;
+    // Return mock data for development in case of error
+    return {
+      category: "shoes",
+    };
   }
 }
 
 // Analyze review sentiment
 export async function analyzeReview(review: string) {
+  const endpoint = "/analyze-review";
+  logApiCall(endpoint, "POST", { review });
+
   try {
-    const response = await fetch(`${baseUrl}/analyze-review/huggingface`, {
+    const response = await fetch(`${baseUrl}${endpoint}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -189,31 +240,48 @@ export async function analyzeReview(review: string) {
     });
 
     if (!response.ok) {
-      throw new Error("Failed to analyze review");
+      throw new Error(
+        `Failed to analyze review: ${response.status} ${response.statusText}`
+      );
     }
 
-    return await response.json();
+    const data = await response.json();
+    logApiResponse(endpoint, data);
+    return data;
   } catch (error) {
+    logApiResponse(endpoint, null, error);
     console.error("Error analyzing review:", error);
-    throw error;
+    // Return mock data for development in case of error
+    return {
+      sentiment: "positive",
+    };
   }
 }
 
 // Get personalized recommendations
 export async function getRecommendations(userId: string) {
+  const endpoint = `/recommendations/${userId}`;
+  logApiCall(endpoint);
+
   try {
     const headers = createHeaders();
 
-    const response = await fetch(`${baseUrl}/recommendations/${userId}`, {
+    const response = await fetch(`${baseUrl}${endpoint}`, {
       headers,
+      cache: "no-store",
     });
 
     if (!response.ok) {
-      throw new Error("Failed to fetch recommendations");
+      throw new Error(
+        `Failed to fetch recommendations: ${response.status} ${response.statusText}`
+      );
     }
 
-    return await response.json();
+    const data = await response.json();
+    logApiResponse(endpoint, data);
+    return data;
   } catch (error) {
+    logApiResponse(endpoint, null, error);
     console.error("Error fetching recommendations:", error);
     // Return mock data for development
     return {

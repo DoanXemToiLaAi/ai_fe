@@ -1,16 +1,57 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import { getProductData } from "@/services/api";
 import ProductDetails from "@/components/product-details";
 import ReviewList from "@/components/review-list";
 import ReviewForm from "@/components/review-form";
 import { Breadcrumb } from "@/components/breadcrumb";
 import RelatedProducts from "@/components/related-products";
+import LoadingState from "@/components/loading-state";
+import ErrorState from "@/components/error-state";
+import type { ProductData } from "@/types";
 
-export default async function ProductPage({
-  params,
-}: {
-  params: { id: string };
-}) {
-  const data = await getProductData(params.id);
+export default function ProductPage({ params }: { params: { id: string } }) {
+  const [data, setData] = useState<ProductData | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  const fetchData = async () => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      const productData = await getProductData(params.id);
+      setData(productData);
+    } catch (err) {
+      setError("Không thể tải dữ liệu sản phẩm. Vui lòng thử lại sau.");
+      console.error(err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, [params.id]);
+
+  if (isLoading) {
+    return (
+      <LoadingState size="large" message="Đang tải thông tin sản phẩm..." />
+    );
+  }
+
+  if (error) {
+    return <ErrorState message={error} onRetry={fetchData} />;
+  }
+
+  if (!data) {
+    return (
+      <ErrorState
+        message="Không có dữ liệu sản phẩm để hiển thị"
+        onRetry={fetchData}
+      />
+    );
+  }
 
   return (
     <div className="container mx-auto px-4 py-8">
