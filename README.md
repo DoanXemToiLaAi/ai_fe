@@ -272,15 +272,6 @@ Nếu bạn có bất kỳ câu hỏi nào, vui lòng liên hệ:
 - **GitHub**: [github.com/your-username/ecommerce-ai](https://github.com/your-username/ecommerce-ai)
 
 
-```plaintext
-
-Ngoài ra, tôi cũng sẽ tạo một file hướng dẫn kiểm tra API cụ thể để giúp team frontend và backend có thể dễ dàng kiểm tra kết nối giữa hai hệ thống:
-
-```md project="AI E-commerce" file="API_TESTING_GUIDE.md" type="markdown"
-# Hướng dẫn kiểm tra API
-
-Tài liệu này cung cấp hướng dẫn chi tiết về cách kiểm tra kết nối giữa frontend và backend của dự án e-commerce AI.
-
 ## 📋 Mục lục
 
 - [Chuẩn bị](#chuẩn-bị)
