@@ -16,11 +16,11 @@ export default function LoadingState({
   };
 
   return (
-    <div className="flex flex-col items-center justify-center py-8">
+    <div className="flex flex-col items-center justify-center py-16">
       <Loader2
-        className={`${sizeClasses[size]} text-primary animate-spin mb-2`}
+        className={`${sizeClasses[size]} text-primary animate-spin mb-4`}
       />
-      <p className="text-gray-600 text-sm">{message}</p>
+      <p className="text-gray-400 text-sm">{message}</p>
     </div>
   );
 }

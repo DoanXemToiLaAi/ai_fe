@@ -13,15 +13,15 @@ export default function ErrorState({
   onRetry,
 }: ErrorStateProps) {
   return (
-    <div className="flex flex-col items-center justify-center py-8 px-4 text-center">
+    <div className="flex flex-col items-center justify-center py-16 px-4 text-center">
       <AlertTriangle className="w-12 h-12 text-red-500 mb-4" />
-      <h3 className="text-lg font-medium text-gray-900 mb-2">Rất tiếc!</h3>
-      <p className="text-gray-600 mb-4 max-w-md">{message}</p>
+      <h3 className="text-xl font-medium text-white mb-2">Rất tiếc!</h3>
+      <p className="text-gray-400 mb-6 max-w-md">{message}</p>
       {onRetry && (
         <Button
           onClick={onRetry}
           variant="outline"
-          className="flex items-center">
+          className="flex items-center border-gray-700 hover:bg-gray-800">
           <RefreshCw className="w-4 h-4 mr-2" /> Thử lại
         </Button>
       )}

@@ -94,8 +94,6 @@ export default function UploadPage() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
             className="bg-white rounded-xl shadow-md p-6">
-            <h2 className="text-xl font-semibold mb-4">Kết quả phân loại</h2>
-
             {isLoading ? (
               <LoadingState message="Đang phân tích hình ảnh..." />
             ) : error ? (
@@ -122,7 +120,7 @@ export default function UploadPage() {
                     {result.category}
                   </p>
                   <p className="text-sm text-blue-600">
-                    Độ chính xác: {result.confidence || 95}%
+                    Độ chính xác: {result.confidence}%
                   </p>
                 </div>
 
