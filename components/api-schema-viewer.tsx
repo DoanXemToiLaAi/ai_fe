@@ -117,7 +117,7 @@ export default function ApiSchemaViewer() {
       },
     },
     review: {
-      endpoint: "/analyze-review",
+      endpoint: "/analyze-review/huggingface",
       method: "POST",
       description: "Endpoint để phân tích cảm xúc từ đánh giá",
       schema: {

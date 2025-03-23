@@ -137,7 +137,7 @@ Phân loại ảnh sản phẩm được tải lên.
 
 ## 4. API Phân Tích Cảm Xúc Đánh Giá
 
-### Endpoint: POST /analyze-review
+### Endpoint: POST /analyze-review/huggingface
 
 Phân tích cảm xúc từ đánh giá của người dùng.
 
@@ -437,7 +437,7 @@ Dưới đây là dữ liệu mẫu chi tiết cho từng API endpoint mà backe
 }
 ```
 
-### 4. Dữ Liệu Mẫu cho `/analyze-review`
+### 4. Dữ Liệu Mẫu cho `/analyze-review/huggingface`
 
 #### Request:
 

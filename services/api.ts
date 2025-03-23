@@ -146,7 +146,7 @@ export async function classifyProduct(
 
 // Analyze review sentiment
 export async function analyzeReview(review: string): Promise<SentimentResult> {
-  const endpoint = "/analyze-review";
+  const endpoint = "/analyze-review/huggingface";
   logApiCall(endpoint, "POST", { review });
 
   try {
