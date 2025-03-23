@@ -34,9 +34,10 @@ Dự án e-commerce AI là một ứng dụng mua sắm trực tuyến tích h�
 
 1. Clone repository:
    ```bash
-   git clone https://github.com/your-username/ecommerce-ai.git
+   git clone https://github.com/DoanXemToiLaAi/ai_fe
    cd ecommerce-ai
    Thought for 2 secondsTôi sẽ tạo một file README.md hoàn chỉnh để hướng dẫn cách kiểm tra và sử dụng dự án, đặc biệt là khi backend đã sẵn sàng:
+   ```
 
 ```markdown project="AI E-commerce" file="README.md"
 ...
@@ -65,7 +66,6 @@ yarn dev
 ```
 
 5. Truy cập ứng dụng tại [http://localhost:3000](http://localhost:3000)
-
 
 ## 📂 Cấu trúc dự án
 
@@ -115,15 +115,11 @@ ecommerce-ai/
 NEXT_PUBLIC_API_URL=http://your-backend-url
 ```
 
-
 2. Hoặc khi chạy ứng dụng:
 
 ```shellscript
 NEXT_PUBLIC_API_URL=http://your-backend-url npm run dev
 ```
-
-
-
 
 ### Kiểm tra kết nối
 
@@ -132,7 +128,6 @@ Sau khi backend đã chạy, bạn có thể kiểm tra kết nối bằng cách
 1. Mở ứng dụng frontend tại [http://localhost:3000](http://localhost:3000)
 2. Kiểm tra trạng thái API ở góc dưới bên trái màn hình
 3. Hoặc truy cập trang kiểm tra API tại [http://localhost:3000/api-test](http://localhost:3000/api-test)
-
 
 ## 🧪 Kiểm tra API
 
@@ -144,7 +139,6 @@ Sau khi backend đã chạy, bạn có thể kiểm tra kết nối bằng cách
 2. Test các endpoint API chính
 3. Xem response từ API
 
-
 ### API Debug Tool
 
 Ngoài ra, ứng dụng còn cung cấp một công cụ debug API ở góc dưới bên phải màn hình, cho phép bạn:
@@ -152,7 +146,6 @@ Ngoài ra, ứng dụng còn cung cấp một công cụ debug API ở góc dư�
 1. Test các endpoint API
 2. Xem chi tiết request và response
 3. Xem lỗi nếu có
-
 
 ### API Schema Viewer
 
@@ -162,7 +155,6 @@ Công cụ API Schema Viewer cho phép bạn:
 2. Test các endpoint API
 3. Xem response từ API
 
-
 ## 🎯 Các tính năng chính
 
 ### 1. Trang chủ
@@ -170,7 +162,6 @@ Công cụ API Schema Viewer cho phép bạn:
 - Hiển thị sản phẩm nổi bật
 - Hiển thị sản phẩm được đề xuất
 - Hiển thị danh mục sản phẩm
-
 
 **API sử dụng**: `GET /home`
 
@@ -181,12 +172,10 @@ Công cụ API Schema Viewer cho phép bạn:
 - Hiển thị sản phẩm liên quan
 - Cho phép người dùng đánh giá sản phẩm
 
-
 **API sử dụng**:
 
 - `GET /product-page/{id}`
 - `POST /analyze-review` (khi đánh giá sản phẩm)
-
 
 ### 3. Trang phân loại ảnh
 
@@ -194,14 +183,12 @@ Công cụ API Schema Viewer cho phép bạn:
 - Phân loại ảnh sản phẩm bằng AI
 - Hiển thị kết quả phân loại
 
-
 **API sử dụng**: `POST /classify-product`
 
 ### 4. Trang gợi ý sản phẩm
 
 - Hiển thị sản phẩm được đề xuất cá nhân hóa
 - Hiển thị sở thích của người dùng
-
 
 **API sử dụng**: `GET /recommendations/{user_id}`
 
@@ -215,34 +202,23 @@ Khi gặp lỗi khi gọi API, bạn có thể:
 2. Sử dụng API Debug Tool để xem chi tiết request và response
 3. Kiểm tra logs của backend
 
-
 ### Các lỗi thường gặp
 
 1. **CORS Error**: Backend chưa cấu hình CORS đúng cách
 
 1. Giải pháp: Cấu hình CORS trong backend để cho phép frontend gọi API
 
-
-
-2. **404 Not Found**: Endpoint API không tồn tại
+1. **404 Not Found**: Endpoint API không tồn tại
 
 1. Giải pháp: Kiểm tra URL API và endpoint trong backend
 
-
-
-3. **500 Internal Server Error**: Lỗi server
+1. **500 Internal Server Error**: Lỗi server
 
 1. Giải pháp: Kiểm tra logs của backend
 
-
-
-4. **Connection Refused**: Backend chưa chạy hoặc URL API không đúng
+1. **Connection Refused**: Backend chưa chạy hoặc URL API không đúng
 
 1. Giải pháp: Kiểm tra backend đã chạy chưa và URL API đã đúng chưa
-
-
-
-
 
 ### Kiểm tra dữ liệu
 
@@ -251,7 +227,6 @@ Khi gặp lỗi khi gọi API, bạn có thể:
 1. Sử dụng API Debug Tool để xem response từ API
 2. Kiểm tra console của trình duyệt để xem dữ liệu được log
 3. Sử dụng API Schema Viewer để xem schema của API
-
 
 ## 🤝 Đóng góp
 
@@ -263,14 +238,12 @@ Chúng tôi rất hoan nghênh mọi đóng góp cho dự án. Nếu bạn muố
 4. Push lên branch (`git push origin feature/amazing-feature`)
 5. Tạo Pull Request
 
-
 ## 📞 Liên hệ
 
 Nếu bạn có bất kỳ câu hỏi nào, vui lòng liên hệ:
 
-- **Email**: [contact@ai-shop.com](mailto:contact@ai-shop.com)
-- **GitHub**: [github.com/your-username/ecommerce-ai](https://github.com/your-username/ecommerce-ai)
-
+- **Email**: [sonvip1998@gmail.com](sonvip1998@gmail.com)
+- **GitHub**: [github.com/DoanXemToiLaAi/ai_fe](https://github.com/DoanXemToiLaAi/ai_fe)
 
 ## 📋 Mục lục
 
@@ -316,11 +289,13 @@ Nếu bạn có bất kỳ câu hỏi nào, vui lòng liên hệ:
 **Mục đích**: Lấy dữ liệu cho trang chủ
 
 **Cách kiểm tra**:
+
 1. Truy cập trang chủ tại [http://localhost:3000](http://localhost:3000)
 2. Kiểm tra sản phẩm nổi bật và sản phẩm được đề xuất đã được hiển thị
 3. Hoặc sử dụng API Debug Tool để test endpoint `/home`
 
 **Dữ liệu mong đợi**:
+
 ```json
 {
   "featured_products": [...],
@@ -337,7 +312,6 @@ Nếu bạn có bất kỳ câu hỏi nào, vui lòng liên hệ:
 1. Truy cập trang chi tiết sản phẩm tại [http://localhost:3000/product/p1](http://localhost:3000/product/p1)
 2. Kiểm tra thông tin sản phẩm, đánh giá và sản phẩm liên quan đã được hiển thị
 3. Hoặc sử dụng API Debug Tool để test endpoint `/product-page/p1`
-
 
 **Dữ liệu mong đợi**:
 
@@ -359,7 +333,6 @@ Nếu bạn có bất kỳ câu hỏi nào, vui lòng liên hệ:
 2. Tải lên một ảnh sản phẩm
 3. Kiểm tra kết quả phân loại đã được hiển thị
 
-
 **Dữ liệu mong đợi**:
 
 ```json
@@ -380,7 +353,6 @@ Nếu bạn có bất kỳ câu hỏi nào, vui lòng liên hệ:
 3. Nhập đánh giá và gửi
 4. Kiểm tra kết quả phân tích cảm xúc đã được hiển thị
 
-
 **Dữ liệu mong đợi**:
 
 ```json
@@ -399,7 +371,6 @@ Nếu bạn có bất kỳ câu hỏi nào, vui lòng liên hệ:
 1. Truy cập trang gợi ý sản phẩm tại [http://localhost:3000/recommendations/user1](http://localhost:3000/recommendations/user1)
 2. Kiểm tra sản phẩm được đề xuất và sở thích của người dùng đã được hiển thị
 3. Hoặc sử dụng API Debug Tool để test endpoint `/recommendations/user1`
-
 
 **Dữ liệu mong đợi**:
 
@@ -447,7 +418,6 @@ app.add_middleware(
 2. Kiểm tra router trong FastAPI đã được cấu hình đúng cách
 3. Kiểm tra endpoint trong frontend đã được gọi đúng cách
 
-
 ### 3. 500 Internal Server Error
 
 **Lỗi**: `GET http://localhost:8000/... 500 (Internal Server Error)`
@@ -460,7 +430,6 @@ app.add_middleware(
 2. Kiểm tra xử lý lỗi trong backend
 3. Kiểm tra kết nối với MongoDB
 
-
 ### 4. Connection Refused
 
 **Lỗi**: `Failed to fetch: TypeError: Failed to fetch`
@@ -472,7 +441,6 @@ app.add_middleware(
 1. Kiểm tra backend đã chạy chưa
 2. Kiểm tra URL API đã đúng chưa
 3. Kiểm tra cổng backend đã đúng chưa
-
 
 ## ✅ Checklist kiểm tra
 
@@ -489,15 +457,9 @@ Sử dụng checklist sau để đảm bảo tất cả các tính năng đã đ
 - API Schema Viewer hiển thị schema của API
 - API Status hiển thị trạng thái kết nối với backend
 
-
 ## 📝 Ghi chú
 
 - Đảm bảo MongoDB đã được seeded dữ liệu mẫu trước khi kiểm tra
 - Nếu bạn thay đổi URL API, đảm bảo cập nhật biến môi trường `NEXT_PUBLIC_API_URL` trong file `.env.local`
 - Nếu bạn gặp lỗi, hãy kiểm tra console của trình duyệt và logs của backend
 
-
-```plaintext
-
-Hai file này sẽ giúp team hiểu rõ cách sử dụng và kiểm tra dự án, đặc biệt là khi backend đã sẵn sàng. File README.md cung cấp tổng quan về dự án và cách cài đặt, trong khi file API_TESTING_GUIDE.md cung cấp hướng dẫn chi tiết về cách kiểm tra kết nối giữa frontend và backend.
-```
