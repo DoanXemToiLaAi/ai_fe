@@ -1,13 +1,13 @@
-"use client";
+"use client"
 
-import { useState, useEffect } from "react";
+import { useState, useEffect } from "react"
 
 export default function DebugBar() {
-  const [backendUrl, setBackendUrl] = useState("");
+  const [backendUrl, setBackendUrl] = useState("")
 
   useEffect(() => {
-    setBackendUrl(process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000");
-  }, []);
+    setBackendUrl(process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000")
+  }, [])
 
   return (
     <div className="fixed bottom-0 left-0 z-50 bg-black/70 text-white p-2 text-sm">
@@ -15,5 +15,6 @@ export default function DebugBar() {
         Backend URL: <code>{backendUrl}</code>
       </p>
     </div>
-  );
+  )
 }
+

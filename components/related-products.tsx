@@ -1,8 +1,8 @@
-import type { Product } from "@/types";
-import ProductCard from "./product-card";
+import type { Product } from "@/types"
+import ProductCard from "./product-card"
 
 interface RelatedProductsProps {
-  products: Product[];
+  products: Product[]
 }
 
 export default function RelatedProducts({ products }: RelatedProductsProps) {
@@ -12,5 +12,6 @@ export default function RelatedProducts({ products }: RelatedProductsProps) {
         <ProductCard key={product._id} product={product} />
       ))}
     </div>
-  );
+  )
 }
+

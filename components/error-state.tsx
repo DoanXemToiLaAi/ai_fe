@@ -1,11 +1,11 @@
-"use client";
+"use client"
 
-import { AlertTriangle, RefreshCw } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { AlertTriangle, RefreshCw } from "lucide-react"
+import { Button } from "@/components/ui/button"
 
 interface ErrorStateProps {
-  message?: string;
-  onRetry?: () => void;
+  message?: string
+  onRetry?: () => void
 }
 
 export default function ErrorState({
@@ -18,13 +18,11 @@ export default function ErrorState({
       <h3 className="text-xl font-medium text-white mb-2">Rất tiếc!</h3>
       <p className="text-gray-400 mb-6 max-w-md">{message}</p>
       {onRetry && (
-        <Button
-          onClick={onRetry}
-          variant="outline"
-          className="flex items-center border-gray-700 hover:bg-gray-800">
+        <Button onClick={onRetry} variant="outline" className="flex items-center border-gray-700 hover:bg-gray-800">
           <RefreshCw className="w-4 h-4 mr-2" /> Thử lại
         </Button>
       )}
     </div>
-  );
+  )
 }
+

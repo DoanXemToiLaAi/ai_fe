@@ -1,55 +1,46 @@
-"use client";
+"use client"
 
-import { useState, useEffect } from "react";
-import { getRecommendations } from "@/services/api";
-import ProductList from "@/components/product-list";
-import { Sparkles, ThumbsUp, ThumbsDown } from "lucide-react";
-import LoadingState from "@/components/loading-state";
-import ErrorState from "@/components/error-state";
-import type { RecommendationsData } from "@/types";
+import { useState, useEffect } from "react"
+import { getRecommendations } from "@/services/api"
+import ProductList from "@/components/product-list"
+import { Sparkles, ThumbsUp, ThumbsDown } from "lucide-react"
+import LoadingState from "@/components/loading-state"
+import ErrorState from "@/components/error-state"
+import type { RecommendationsData } from "@/types"
 
-export default function RecommendationsPage({
-  params,
-}: {
-  params: { userId: string };
-}) {
-  const [data, setData] = useState<RecommendationsData | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+export default function RecommendationsPage({ params }: { params: { userId: string } }) {
+  const [data, setData] = useState<RecommendationsData | null>(null)
+  const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
   const fetchData = async () => {
-    setIsLoading(true);
-    setError(null);
+    setIsLoading(true)
+    setError(null)
     try {
-      const recommendationsData = await getRecommendations(params.userId);
-      setData(recommendationsData);
+      const recommendationsData = await getRecommendations(params.userId)
+      setData(recommendationsData)
     } catch (err) {
-      setError("Không thể tải dữ liệu gợi ý. Vui lòng thử lại sau.");
-      console.error(err);
+      setError("Không thể tải dữ liệu gợi ý. Vui lòng thử lại sau.")
+      console.error(err)
     } finally {
-      setIsLoading(false);
+      setIsLoading(false)
     }
-  };
+  }
 
   useEffect(() => {
-    fetchData();
-  }, [params.userId]);
+    fetchData()
+  }, [params.userId])
 
   if (isLoading) {
-    return <LoadingState size="large" message="Đang tải gợi ý sản phẩm..." />;
+    return <LoadingState size="large" message="Đang tải gợi ý sản phẩm..." />
   }
 
   if (error) {
-    return <ErrorState message={error} onRetry={fetchData} />;
+    return <ErrorState message={error} onRetry={fetchData} />
   }
 
   if (!data) {
-    return (
-      <ErrorState
-        message="Không có dữ liệu gợi ý để hiển thị"
-        onRetry={fetchData}
-      />
-    );
+    return <ErrorState message="Không có dữ liệu gợi ý để hiển thị" onRetry={fetchData} />
   }
 
   return (
@@ -60,8 +51,7 @@ export default function RecommendationsPage({
             Gợi ý cá nhân hóa cho bạn
           </h1>
           <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
-            Dựa trên lịch sử mua sắm và sở thích của bạn, AI của chúng tôi đã
-            chọn ra những sản phẩm phù hợp nhất.
+            Dựa trên lịch sử mua sắm và sở thích của bạn, AI của chúng tôi đã chọn ra những sản phẩm phù hợp nhất.
           </p>
         </div>
 
@@ -70,10 +60,7 @@ export default function RecommendationsPage({
             <Sparkles className="h-8 w-8 mr-3" />
             <div>
               <h2 className="text-xl font-bold">Công nghệ AI gợi ý</h2>
-              <p>
-                Hệ thống của chúng tôi học từ sở thích của bạn để đề xuất những
-                sản phẩm phù hợp nhất.
-              </p>
+              <p>Hệ thống của chúng tôi học từ sở thích của bạn để đề xuất những sản phẩm phù hợp nhất.</p>
             </div>
           </div>
         </div>
@@ -82,9 +69,7 @@ export default function RecommendationsPage({
           <div className="flex items-center justify-between mb-8">
             <h2 className="text-2xl font-bold">Sản phẩm gợi ý</h2>
             <div className="flex items-center space-x-2">
-              <span className="text-sm text-gray-500">
-                Gợi ý có hữu ích không?
-              </span>
+              <span className="text-sm text-gray-500">Gợi ý có hữu ích không?</span>
               <button className="p-2 rounded-full bg-gray-100 text-gray-600 hover:bg-green-100 hover:text-green-600 transition-colors">
                 <ThumbsUp className="h-5 w-5" />
               </button>
@@ -98,31 +83,24 @@ export default function RecommendationsPage({
         </div>
 
         <div className="bg-gray-50 rounded-xl p-8">
-          <h2 className="text-2xl font-bold mb-6 text-center">
-            Tại sao bạn nhận được những gợi ý này?
-          </h2>
+          <h2 className="text-2xl font-bold mb-6 text-center">Tại sao bạn nhận được những gợi ý này?</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="bg-white p-6 rounded-lg shadow-sm">
               <h3 className="text-lg font-medium mb-2">Lịch sử mua sắm</h3>
-              <p className="text-gray-600">
-                Dựa trên các sản phẩm bạn đã xem và mua trước đây
-              </p>
+              <p className="text-gray-600">Dựa trên các sản phẩm bạn đã xem và mua trước đây</p>
             </div>
             <div className="bg-white p-6 rounded-lg shadow-sm">
               <h3 className="text-lg font-medium mb-2">Sở thích cá nhân</h3>
-              <p className="text-gray-600">
-                Phân tích các danh mục và thương hiệu bạn quan tâm
-              </p>
+              <p className="text-gray-600">Phân tích các danh mục và thương hiệu bạn quan tâm</p>
             </div>
             <div className="bg-white p-6 rounded-lg shadow-sm">
               <h3 className="text-lg font-medium mb-2">Xu hướng thị trường</h3>
-              <p className="text-gray-600">
-                Kết hợp với các sản phẩm đang được ưa chuộng
-              </p>
+              <p className="text-gray-600">Kết hợp với các sản phẩm đang được ưa chuộng</p>
             </div>
           </div>
         </div>
       </div>
     </div>
-  );
+  )
 }
+
