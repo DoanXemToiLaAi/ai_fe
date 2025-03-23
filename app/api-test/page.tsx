@@ -22,7 +22,7 @@ export default function ApiTestPage() {
   const apiEndpoints = [
     { endpoint: "/home", method: "GET", description: "Trang chủ" },
     {
-      endpoint: "/product-page/p1",
+      endpoint: "/product-page/ba3",
       method: "GET",
       description: "Chi tiết sản phẩm",
     },
