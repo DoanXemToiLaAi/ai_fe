@@ -25,7 +25,7 @@ export default function RecommendedProducts({
 
         {showViewAll && (
           <Link
-            href="/recommendations/user1"
+            href="/recommendations/u1"
             className="text-primary hover:text-primary/80 transition-colors text-sm">
             Xem tất cả
           </Link>

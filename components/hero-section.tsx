@@ -35,7 +35,7 @@ export default function HeroSection() {
                   Tìm bằng hình ảnh
                 </Button>
               </Link>
-              <Link href="/recommendations/user1">
+              <Link href="/recommendations/u1">
                 <Button
                   variant="outline"
                   className="border-gray-700 hover:bg-gray-800 px-6 py-3 rounded-lg flex items-center">

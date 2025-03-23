@@ -80,7 +80,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/recommendations/user1"
+                  href="/recommendations/u1"
                   className="text-gray-400 hover:text-primary transition-colors">
                   Gợi ý cá nhân
                 </Link>

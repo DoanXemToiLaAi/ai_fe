@@ -27,7 +27,7 @@ export default function ApiTestPage() {
       description: "Chi tiết sản phẩm",
     },
     {
-      endpoint: "/recommendations/user1",
+      endpoint: "/recommendations/u1",
       method: "GET",
       description: "Gợi ý sản phẩm",
     },
