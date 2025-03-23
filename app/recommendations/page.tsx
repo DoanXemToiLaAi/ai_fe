@@ -2,7 +2,7 @@ import { getRecommendations } from "@/services/api";
 import ProductList from "@/components/product/product-list";
 
 // Trong thực tế, user_id sẽ được lấy từ session/authentication
-const MOCK_USER_ID = "user123";
+const MOCK_USER_ID = "u1";
 
 export default async function RecommendationsPage() {
   const { recommended_products } = await getRecommendations(MOCK_USER_ID);

@@ -1,21 +1,22 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { ChevronDown, ChevronUp, Code, Copy, Play, X } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { useState } from "react";
+import { ChevronDown, ChevronUp, Code, Copy, Play, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export default function ApiSchemaViewer() {
-  const [isOpen, setIsOpen] = useState(false)
-  const [activeTab, setActiveTab] = useState<string>("home")
-  const [testResponse, setTestResponse] = useState<string | null>(null)
-  const [isLoading, setIsLoading] = useState(false)
-  const [testError, setTestError] = useState<string | null>(null)
+  const [isOpen, setIsOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState<string>("home");
+  const [testResponse, setTestResponse] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [testError, setTestError] = useState<string | null>(null);
 
   const schemas = {
     home: {
       endpoint: "/home",
       method: "GET",
-      description: "Endpoint cho trang chủ, trả về sản phẩm nổi bật và sản phẩm được đề xuất",
+      description:
+        "Endpoint cho trang chủ, trả về sản phẩm nổi bật và sản phẩm được đề xuất",
       schema: {
         featured_products: [
           {
@@ -46,7 +47,8 @@ export default function ApiSchemaViewer() {
     product: {
       endpoint: "/product-page/{id}",
       method: "GET",
-      description: "Endpoint cho trang chi tiết sản phẩm, trả về thông tin sản phẩm, đánh giá và sản phẩm liên quan",
+      description:
+        "Endpoint cho trang chi tiết sản phẩm, trả về thông tin sản phẩm, đánh giá và sản phẩm liên quan",
       schema: {
         product: {
           _id: "p1",
@@ -147,36 +149,37 @@ export default function ApiSchemaViewer() {
         user_preferences: ["electronics", "wearables", "premium"],
       },
     },
-  }
+  };
 
   const copyToClipboard = (text: string) => {
-    navigator.clipboard.writeText(text)
-  }
+    navigator.clipboard.writeText(text);
+  };
 
   const testEndpoint = async () => {
-    setIsLoading(true)
-    setTestError(null)
-    setTestResponse(null)
+    setIsLoading(true);
+    setTestError(null);
+    setTestResponse(null);
 
     try {
       // @ts-ignore
-      let endpoint = schemas[activeTab].endpoint
+      let endpoint = schemas[activeTab].endpoint;
 
       // Thay thế các tham số trong endpoint
       if (endpoint.includes("{id}")) {
-        endpoint = endpoint.replace("{id}", "p1")
+        endpoint = endpoint.replace("{id}", "p1");
       }
       if (endpoint.includes("{user_id}")) {
-        endpoint = endpoint.replace("{user_id}", "user123")
+        endpoint = endpoint.replace("{user_id}", "u1");
       }
 
-      const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
+      const baseUrl =
+        process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
       // @ts-ignore
-      const method = schemas[activeTab].method
+      const method = schemas[activeTab].method;
 
-      let response
+      let response;
       if (method === "GET") {
-        response = await fetch(`${baseUrl}${endpoint}`)
+        response = await fetch(`${baseUrl}${endpoint}`);
       } else if (method === "POST") {
         if (activeTab === "review") {
           response = await fetch(`${baseUrl}${endpoint}`, {
@@ -184,38 +187,54 @@ export default function ApiSchemaViewer() {
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({ review: "Sản phẩm tuyệt vời, tôi rất hài lòng!" }),
-          })
+            body: JSON.stringify({
+              review: "Sản phẩm tuyệt vời, tôi rất hài lòng!",
+            }),
+          });
         } else {
           // Không thể test classify-product vì cần file
-          setTestError("Không thể test endpoint này vì cần tải lên file")
-          setIsLoading(false)
-          return
+          setTestError("Không thể test endpoint này vì cần tải lên file");
+          setIsLoading(false);
+          return;
         }
       }
 
       if (!response?.ok) {
-        throw new Error(`HTTP error! status: ${response?.status}`)
+        throw new Error(`HTTP error! status: ${response?.status}`);
       }
 
-      const data = await response?.json()
-      setTestResponse(JSON.stringify(data, null, 2))
+      const data = await response?.json();
+      setTestResponse(JSON.stringify(data, null, 2));
     } catch (error) {
-      console.error("Error testing endpoint:", error)
-      setTestError(`Lỗi khi test endpoint: ${error instanceof Error ? error.message : String(error)}`)
+      console.error("Error testing endpoint:", error);
+      setTestError(
+        `Lỗi khi test endpoint: ${
+          error instanceof Error ? error.message : String(error)
+        }`
+      );
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   return (
-    <div className="fixed bottom-32 right-0 z-50 w-full max-w-md" data-testid="api-schema-viewer">
+    <div
+      className="fixed bottom-32 right-0 z-50 w-full max-w-md"
+      data-testid="api-schema-viewer">
       <div className="bg-gray-900 border border-gray-800 text-white rounded-l-lg shadow-lg">
-        <div className="flex justify-between items-center p-3 cursor-pointer" onClick={() => setIsOpen(!isOpen)}>
+        <div
+          className="flex justify-between items-center p-3 cursor-pointer"
+          onClick={() => setIsOpen(!isOpen)}>
           <h3 className="font-medium flex items-center">
             <Code className="w-4 h-4 mr-2" /> API Schema Viewer
           </h3>
-          <div>{isOpen ? <ChevronDown className="w-4 h-4" /> : <ChevronUp className="w-4 h-4" />}</div>
+          <div>
+            {isOpen ? (
+              <ChevronDown className="w-4 h-4" />
+            ) : (
+              <ChevronUp className="w-4 h-4" />
+            )}
+          </div>
         </div>
 
         {isOpen && (
@@ -226,14 +245,15 @@ export default function ApiSchemaViewer() {
                   <button
                     key={key}
                     onClick={() => {
-                      setActiveTab(key)
-                      setTestResponse(null)
-                      setTestError(null)
+                      setActiveTab(key);
+                      setTestResponse(null);
+                      setTestError(null);
                     }}
                     className={`px-4 py-2 text-sm ${
-                      activeTab === key ? "border-b-2 border-primary text-primary" : "text-gray-400 hover:text-white"
-                    }`}
-                  >
+                      activeTab === key
+                        ? "border-b-2 border-primary text-primary"
+                        : "text-gray-400 hover:text-white"
+                    }`}>
                     {key.charAt(0).toUpperCase() + key.slice(1)}
                   </button>
                 ))}
@@ -246,7 +266,9 @@ export default function ApiSchemaViewer() {
                 {schemas[activeTab].endpoint} ({schemas[activeTab].method})
               </div>
               {/* @ts-ignore */}
-              <div className="mb-2 text-sm">{schemas[activeTab].description}</div>
+              <div className="mb-2 text-sm">
+                {schemas[activeTab].description}
+              </div>
 
               <div className="mt-2 relative">
                 <div className="flex justify-between mb-2">
@@ -258,9 +280,10 @@ export default function ApiSchemaViewer() {
                       className="p-1 h-8 w-8"
                       onClick={() => {
                         /* @ts-ignore */
-                        copyToClipboard(JSON.stringify(schemas[activeTab].schema, null, 2))
-                      }}
-                    >
+                        copyToClipboard(
+                          JSON.stringify(schemas[activeTab].schema, null, 2)
+                        );
+                      }}>
                       <Copy className="h-4 w-4" />
                     </Button>
                     <Button
@@ -268,8 +291,7 @@ export default function ApiSchemaViewer() {
                       size="sm"
                       className="p-1 h-8 w-8"
                       onClick={testEndpoint}
-                      disabled={isLoading}
-                    >
+                      disabled={isLoading}>
                       {isLoading ? (
                         <div className="h-4 w-4 border-2 border-t-transparent border-white rounded-full animate-spin"></div>
                       ) : (
@@ -293,11 +315,14 @@ export default function ApiSchemaViewer() {
                         variant="outline"
                         size="sm"
                         className="p-1 h-8 w-8"
-                        onClick={() => copyToClipboard(testResponse)}
-                      >
+                        onClick={() => copyToClipboard(testResponse)}>
                         <Copy className="h-4 w-4" />
                       </Button>
-                      <Button variant="outline" size="sm" className="p-1 h-8 w-8" onClick={() => setTestResponse(null)}>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="p-1 h-8 w-8"
+                        onClick={() => setTestResponse(null)}>
                         <X className="h-4 w-4" />
                       </Button>
                     </div>
@@ -318,6 +343,5 @@ export default function ApiSchemaViewer() {
         )}
       </div>
     </div>
-  )
+  );
 }
-

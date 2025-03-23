@@ -59,7 +59,7 @@ export default function Header() {
                 AI Classify
               </span>
             </Link>
-            <Link href="/recommendations/user123" className="text-gray-300 hover:text-white transition-colors">
+            <Link href="/recommendations/u1" className="text-gray-300 hover:text-white transition-colors">
               <span className="sr-only">Recommendations</span>
               <span className="px-3 py-1 text-sm bg-primary text-white rounded-md hover:bg-primary/90 transition-colors">
                 For You
@@ -113,7 +113,7 @@ export default function Header() {
                   <span className="text-xs">Tải ảnh</span>
                 </Link>
                 <Link
-                  href="/recommendations/user123"
+                  href="/recommendations/u1"
                   className="flex flex-col items-center p-2 text-gray-300 hover:text-white transition-colors"
                 >
                   <Sparkles className="h-6 w-6 mb-1" />

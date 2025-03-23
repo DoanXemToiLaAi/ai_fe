@@ -25,7 +25,7 @@ export default function ApiDebug() {
     const endpoints = [
       { url: "/home", method: "GET" },
       { url: "/product-page/p1", method: "GET" },
-      { url: "/recommendations/user123", method: "GET" },
+      { url: "/recommendations/u1", method: "GET" },
     ]
 
     const newApiCalls: ApiCall[] = []
